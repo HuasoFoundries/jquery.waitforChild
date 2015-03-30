@@ -91,6 +91,14 @@ $('#mylist').waitforChild({
 }).addClass('niceclass');
 ```
 
+
+### Why can't I just delegate on the parent object?
+
+Delegation is useful if you want to take advantage of natural event bubbling, and if you're already using jQuery you'll be able to use it even in older browsers. However, there are cases in which delegation won't solve your problem. For example, when you want to [apply KnockOut's declarative bindings](http://knockoutjs.com/documentation/observables.html), or render a [Backbone View](http://backbonejs.org/#View).
+
+Moreover, abusing event delegation makes it harder to keep track of where is a given behavior triggered, and you risk assigning it multiple times if you declare the delegated event in the wrong place. 
+
+
 ### Caveats
 
 The [MutationObserver](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver) object needs an existing Node to operate on. Therefore, you can't invoke *jquery.waitforChild* on an element which isn't in the DOM.
