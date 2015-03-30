@@ -1,13 +1,11 @@
-/**
- * jQuery waitforChild Plugin v0.0.1
+/*!
+ * jQuery waitforChild Plugin v0.0.2
  * https://github.com/amenadiel/jquery.waitforChild
  *
  * Copyright 2015 Felipe Figueroa
  * Released under the MIT license
  */
 (function ($) {
-
-
 
 
 	/**
