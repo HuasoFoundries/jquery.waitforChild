@@ -1,11 +1,13 @@
 /*!
- * jQuery waitforChild Plugin v0.0.2
+ * jQuery waitforChild Plugin v0.0.1
  * https://github.com/amenadiel/jquery.waitforChild
  *
  * Copyright 2015 Felipe Figueroa
  * Released under the MIT license
  */
 (function ($) {
+
+
 
 
 	/**
@@ -22,10 +24,13 @@
 			querySelector = arguments[0].querySelector || null;
 			onFound = arguments[0].onFound;
 		}
+		console.debug('waitforChild on', this.selector, querySelector);
 		if (!onFound) {
 			onFound = function () {};
 		}
-		var $this = $(this.selector);
+		var this_selector = this.selector,
+			$this = $(this_selector);
+
 
 		// If no querySelector was asked, and the element has children, apply the onFound function either to the first or to all of them
 		if (!querySelector && $this.children().length) {
@@ -50,28 +55,43 @@
 				});
 			}
 		} else {
-			// Otherwise, set a new MutationObserver and inspect each new inserted child from now on.
-			var observer = new MutationObserver(function (mutations) {
-				var _this = this;
-				mutations.forEach(function (mutation) {
-					if (mutation.addedNodes) {
-						// if 
-						if (!querySelector || $(mutation.addedNodes[0]).is(querySelector)) {
-							onFound($(mutation.addedNodes[0]));
-							if (once) {
-								_this.disconnect();
+			if ($this.length === 0) {
+				console.warn("Can't attach an observer to a null node", this_selector);
+			} else {
+				// Otherwise, set a new MutationObserver and inspect each new inserted child from now on.
+				var observer = new MutationObserver(function (mutations) {
+					var _this = this;
+					mutations.forEach(function (mutation) {
+						if (mutation.addedNodes) {
+							if (!querySelector) {
+								onFound($(mutation.addedNodes[0]));
+								if (once) {
+									_this.disconnect();
+								}
+							} else {
+								for (var i = 0; i < mutation.addedNodes.length; ++i) {
+									var addedNode = mutation.addedNodes[i];
+									if ($(addedNode).is(querySelector)) {
+										onFound($(addedNode));
+										if (once) {
+											_this.disconnect();
+											break;
+										}
+									}
+								}
 							}
 						}
-					}
+					});
 				});
-			});
 
-			observer.observe($this[0], {
-				childList: true,
-				subtree: true,
-				attributes: false,
-				characterData: false
-			});
+				observer.observe($this[0], {
+					childList: true,
+					subtree: true,
+					attributes: false,
+					characterData: false
+				});
+			}
+
 		}
 
 
