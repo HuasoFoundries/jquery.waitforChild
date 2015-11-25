@@ -1,5 +1,5 @@
 /*!
- * jQuery waitforChild Plugin v0.0.1
+ * jQuery waitforChild Plugin v0.1
  * https://github.com/amenadiel/jquery.waitforChild
  *
  * Copyright 2015 Felipe Figueroa
@@ -7,7 +7,7 @@
  */
 (function ($) {
 
-
+	'use strict';
 
 
 	/**
@@ -24,12 +24,11 @@
 			querySelector = arguments[0].querySelector || null;
 			onFound = arguments[0].onFound;
 		}
-		console.debug('waitforChild on', this.selector, querySelector);
+
 		if (!onFound) {
 			onFound = function () {};
 		}
-		var this_selector = this.selector,
-			$this = $(this_selector);
+		var $this = this;
 
 
 		// If no querySelector was asked, and the element has children, apply the onFound function either to the first or to all of them
@@ -56,7 +55,7 @@
 			}
 		} else {
 			if ($this.length === 0) {
-				console.warn("Can't attach an observer to a null node", this_selector);
+				console.warn("Can't attach an observer to a null node", $this);
 			} else {
 				// Otherwise, set a new MutationObserver and inspect each new inserted child from now on.
 				var observer = new MutationObserver(function (mutations) {
