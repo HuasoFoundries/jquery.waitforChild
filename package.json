@@ -1,6 +1,6 @@
 {
   "name": "jquery.waitforChild",
-  "version": "0.1",
+  "version": "0.1.1",
   "description": "jQuery plugin that schedules a function to be run once a child node matching a condition is appended to an existing element",
   "main": "jquery.waitforChild.js",
   "scripts": {
