@@ -1,7 +1,7 @@
 {
   "name": "jquery.waitforChild",
-  "version": "0.1.1",
-  "description": "jQuery plugin that schedules a function to be run once a child node matching a condition is appended to an existing element",
+  "version": "1.0.0",
+  "description": "jQuery plugin to declare handlers to be executed once a child node is appended to the target element",
   "main": "jquery.waitforChild.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

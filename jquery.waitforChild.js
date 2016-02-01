@@ -1,14 +1,26 @@
 /*!
- * jQuery waitforChild Plugin v0.1
+ * jQuery waitforChild Plugin v0.0.1
  * https://github.com/amenadiel/jquery.waitforChild
  *
  * Copyright 2015 Felipe Figueroa
  * Released under the MIT license
  */
-(function ($) {
+(function (root, factory) {
+
+	if (typeof define === "function" && define.amd) {
+		// AMD (+ global for extensions)
+		define(['jquery'], factory);
+
+	} else if (typeof module !== 'undefined' && typeof exports === "object") {
+		// CommonJS
+		module.exports = factory(require('jquery'));
+	} else {
+		// Browser
+		root.jQuery = factory(root.jQuery);
+	}
+}(this, function ($) {
 
 	'use strict';
-
 
 	/**
 	 * Will execute a function on matching child elements, or set a MutationObserver to detect if they are appended afterwards
@@ -28,8 +40,8 @@
 		if (!onFound) {
 			onFound = function () {};
 		}
-		var $this = this;
 
+		var $this = this;
 
 		// If no querySelector was asked, and the element has children, apply the onFound function either to the first or to all of them
 		if (!querySelector && $this.children().length) {
@@ -98,4 +110,4 @@
 		return $this;
 	};
 
-}(jQuery));
+}));
