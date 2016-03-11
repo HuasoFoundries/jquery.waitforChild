@@ -1,6 +1,6 @@
 {
   "name": "jquery.waitforChild",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "jQuery plugin to declare handlers to be executed once a child node is appended to the target element",
   "main": "jquery.waitforChild.js",
   "scripts": {

@@ -2,6 +2,8 @@
 
 Operate on matching children of a given element. If no matching children are found, it will set an observer to run the desired operation once (if) the element gets inserted afterwards.
 
+[![npm](https://img.shields.io/npm/dm/jquery.waitforChild.svg)](https://www.npmjs.com/package/jquery.waitforChild)
+
 ## How to use
 
 Let's say you have a container and this container has children
