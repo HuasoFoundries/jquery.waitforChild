@@ -46,28 +46,21 @@ $('#mylist').append('<li class="third">Third item</li>');
 But you don't know when or from where. With **jquery.waitforChild** you just can set a listener on the container:
 
 ```js
-$('#mylist').waitforChild(function(child) {
-    child.addClass('pink');
-},'li.second');
+$('#mylist').waitforChild({
+    onFound: function(child) {
+        child.addClass('pink');
+    },
+    querySelector: 'li.second'
+});
 ```
 
 Now, whenever a matching childNode is inserted on *#mylist*, the function will be invoked on it. 
 
 ### Apply the onFound function only once
 
-There are some cases in which you will want to act on the first element to match the selection. If that's the case, you can pass a third parameter:
+There are some cases in which you will want to act on the first element to match the selection, so further elements won't trigger
+the handler function. In that case, pass the option `once` to the config object:
 
-```js
-$('#mylist').waitforChild(function(child) {
-    child.addClass('pink');
-},'li.second',true);
-```
-
-Which will operate only on the first matching element ever appended to the container.
-
-### Passing the parameters as an object
-
-The plugin also accepts an object as the only argument, in the form:
 
 ```js
 $('#mylist').waitforChild({
@@ -78,6 +71,10 @@ $('#mylist').waitforChild({
     once: true
 });
 ```
+
+Which will operate only on the first matching element ever appended to the container.
+
+
 
 ### Chaining methods
 
